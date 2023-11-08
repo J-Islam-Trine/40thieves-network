@@ -1,19 +1,22 @@
 import { Link } from "react-router-dom"
 
-import 
-
 import { useContext} from "react"
-import { LoginStateContext } from "../contexts/loginContext"
-import Login from "../routes/login"
+import { LoginStateContext } from "../contexts/loginContext";
+import { getAuth, signOut } from "firebase/auth"
 
 export default function Navbar()
 {
-
-	const auth 
+	const auth = getAuth();
 
 	function handleSignOut()
 	{
-		
+		signOut(auth).then(() => {
+			console.log(loginState);
+			console.log('signing out now!');
+			setLoginState(false);
+		  }).catch((error) => {
+			// An error happened.
+		  });
 	}
 
 	const {loginState, setLoginState} = useContext(LoginStateContext);
